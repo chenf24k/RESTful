@@ -1,0 +1,16 @@
+spring:
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false # 使用 timestamp 表示日期
+  servlet:
+    multipart:
+      max-file-size: 10MB
+logging:
+  file: target/app.log
+  level:
+    ROOT: WARN
+    com.chenf24k.restful: trace
+server:
+  port: 8080
