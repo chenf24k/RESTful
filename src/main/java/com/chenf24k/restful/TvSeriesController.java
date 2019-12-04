@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.*;
 import java.util.*;
 
@@ -25,7 +26,7 @@ public class TvSeriesController {
     }
     */
 
-    @GetMapping("/getAll")
+    @GetMapping
     public List<TvSeriesDto> getAll() {
         if (log.isTraceEnabled()) {
             log.trace("getAll();被调用了");
@@ -52,11 +53,17 @@ public class TvSeriesController {
         }
     }
 
-    @PostMapping("/add")
-    public TvSeriesDto insertOne(@RequestBody TvSeriesDto tvSeriesDto) {
+    /**
+     * @param tvSeriesDto
+     * @return TvSeriesDto
+     * @Valid 注解表示验证需要传入的参数TvSeriesDto，需要验证的field在TvSeriesDto内通过注解定义（@NotNull,@DecimalMin等）
+     */
+    @PostMapping
+    public TvSeriesDto insertOne(@Valid @RequestBody TvSeriesDto tvSeriesDto) {
         if (log.isTraceEnabled()) {
             log.trace("这里应该些新增tvSeriesDto到数据库的代码，传递来的参数是：" + tvSeriesDto);
         }
+        // TODO
         tvSeriesDto.setId(999);
         return tvSeriesDto;
     }
@@ -115,7 +122,7 @@ public class TvSeriesController {
         String iconFile = "src/main/resources/郭贤081--12寸妮雅.jpg";
         InputStream is = new FileInputStream(iconFile);
         return IOUtils.toByteArray(is);
-    }asdfasdf
+    }
 
     private TvSeriesDto createPoi() {
         Calendar calendar = Calendar.getInstance();
